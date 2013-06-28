@@ -1,6 +1,6 @@
 # puppet-node_builder
 
-A Puppet module for deploying a basic/raw DDF node.
+A Puppet module for deploying a [Node Builder](https://github.com/OpenDX/node-builder) application.
 
 
 ---
