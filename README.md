@@ -26,8 +26,8 @@ service { "tomcat6":
 } ->
 class { "node_builder":
   openstack_key_id => "opendx_demo",
-  openstack_hostname => "107.2.16.122",
-  master_hostname => "107.2.16.122",
+  openstack_hostname => "hostname",
+  master_hostname => "hostname",
   openstack_tenant_id => "2ba2d60c5e8d4d1b86549d988131fe48"
 }
 
