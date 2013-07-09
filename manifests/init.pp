@@ -1,5 +1,5 @@
 class node_builder($deploy_user="tomcat",
- $artifact_url="http://artifacts.codice.org/content/repositories/snapshots/org/codice/opendx/node-builder/1.0-SNAPSHOT/node-builder-1.0-20130628.170856-4.war",
+ $artifact_url="http://artifacts.codice.org/content/repositories/snapshots/org/codice/opendx/node-builder/1.0-SNAPSHOT/node-builder-1.0-20130709.225150-59.war",
  $deploy_path="/usr/share/tomcat6/webapps",
  $openstack_hostname = "localhost",
  $openstack_username = "admin",
