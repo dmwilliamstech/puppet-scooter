@@ -1,0 +1,19 @@
+dataSource {
+    dbCreate = "update"
+    url = "<%= @db_url %>"
+    pooled = true
+    driverClassName = "org.postgresql.Driver"
+    dialect = org.hibernate.dialect.PostgreSQLDialect
+    username = "<%= @db_username %>"
+    password = "<%= @db_password %>"
+    properties {
+       maxActive = -1
+       minEvictableIdleTimeMillis=1800000
+       timeBetweenEvictionRunsMillis=1800000
+       numTestsPerEvictionRun=3
+       testOnBorrow=true
+       testWhileIdle=true
+       testOnReturn=true
+       validationQuery="SELECT 1"
+    }
+}

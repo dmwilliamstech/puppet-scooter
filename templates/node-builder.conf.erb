@@ -1,0 +1,209 @@
+
+/*
+ * This is the default node-builder configuration file.  Please update settings with values
+ * that are accurate for your environment.  There is a brief explanation of each section with examples.
+ * Changes to the config require a server restart to pick them up.
+ *
+ *
+ * Node builder has the ablility to interact with open stack.  This section allows you to define the location of
+ * the openstack installation with some login and default parameters as well.
+ */
+openstack {
+    /*
+     * url for the indentity endpoint on openstack
+     */
+    url  =  "<%= @openstack_url %>"
+
+    /*
+     * user to login to openstack with
+     */
+    username = '<%= @openstack_username %>'
+
+    /*
+     * password for user authentication in openstack
+     */
+    password = '<%= @openstack_password %>'
+
+    /*
+     * tenant api key for accessing an openstack project
+     */
+    tenant.id = '<%= @openstack_tenant_id %>'
+
+    /*
+     * default key name for using with new openstack instances
+     */
+    key.id = '<%= @openstack_key_id %>'
+
+    /*
+     * default flavor id for starting new openstack instances, will be
+     * used if larger than that specified by a node descriptor
+     */
+    flavor.id = '<%= @openstack_flavor_id %>'
+}
+/*
+ * Node builder has the ablility to interact with email systems.  This section allows you to define the location of
+ * your smtp and imap email servers.  You can also add default username, from address and imap folder for reading.
+ */
+email {
+
+    /*
+     * Node builder smtp server settings
+     *
+     */
+    smtp{
+
+        /*
+         * hostname your smtp server is running on
+         */
+        hostname = '<%= @smtp_hostname %>'
+
+        /*
+         * port the smtp server is listening to
+         */
+        port = <%= @smtp_port %>
+
+        /*
+         * username for authentication if required
+         */
+        username = '<%= @smtp_username %>'
+
+        /*
+         * password for authentication if required
+         */
+        password = '<%= @smtp_password %>'
+
+        /*
+         * default from address for use in sending emails
+         */
+        from = '<%= @smtp_from %>'
+    }
+
+    /*
+     * Node builder imap server settings
+     *
+     */
+    imap{
+
+        /*
+         * hostname your imap server is running on
+         */
+        hostname = '<%= @imap_hostname %>'
+
+        /*
+         * port the imap server is listening to
+         */
+        port = <%= @imap_port %>
+
+        /*
+         * username for accessing an imap folder
+         */
+        username = '<%= @imap_username %>'
+
+        /*
+         * password for accessing an imap folder
+         */
+        password = '<%= @imap_password %>'
+
+        /*
+         * default imap folder to access
+         */
+        folder = '<%= @imap_folder %>'
+    }
+
+}
+
+/*
+ * Node builder can interact with multiple source code bases.  It may be helpful to
+ * use a specific location for all working copies.
+ */
+workspace {
+
+    /*
+     * path to node builder's workspace
+     */
+    path = "<%= @workspace_path %>"
+}
+
+/*
+ * Node builder can interact with jenkins by creating jobs, running them and
+ * accessing and data created during the run.
+ */
+jenkins {
+
+    /*
+     * Url to the jenkins server
+     */
+    url = "<%= @jenkins_url %>"
+
+    /*
+     * user to authenticate with jenkins
+     */
+    user = "<%= @jenkins_user %>"
+
+    /*
+     * user to authenticate with jenkins
+     */
+    password = "<%= @jenkins_password %>"
+}
+
+
+/*
+ * Node builder can interact with jira by creating issues, interacting with them.
+ */
+jira {
+    /*
+     * Url to the jenkins server
+     */
+    url = "<%= @jira_url %>"
+
+    /*
+     * user to authenticate with jira
+     */
+    user = "<%= @jira_user %>"
+
+    /*
+     * user to authenticate with jira
+     */
+    password = "<%= @jira_password %>"
+
+    /*
+     * default project name to use with issues
+     */
+    project = "<%= @jira_project %>"
+
+    /*
+     * default issue type use when creating new issues
+     */
+    issueType = <%= @jira_issue_type %>
+}
+
+/*
+ * Node builder can interact with puppet by creating manifests for nodes
+ * and uploading them to the puppet master
+ */
+puppet {
+    /*
+     * name of the puppet master
+     */
+    name = '<%= @puppet_name %>'
+
+    /*
+     * hostname of the puppet master
+     */
+    hostname = '<%= @puppet_hostname %>'
+
+    /*
+     * username to login to the server with
+     */
+    username = '<%= @puppet_username %>'
+
+    /*
+     * name of the local private key to use for authentication
+     */
+    privateKey = '<%= @puppet_private_key %>'
+
+    /*
+     * path to the manifest/nodes directory on the puppet master
+     */
+    remote.path = '<%= @puppet_remote_path %>'
+}

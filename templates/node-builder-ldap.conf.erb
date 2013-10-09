@@ -1,0 +1,18 @@
+
+grails.plugins.springsecurity.ldap.context.managerDn = '<%= @ldap_manager_dn %>'
+grails.plugins.springsecurity.ldap.context.managerPassword = '<%= @ldap_manager_password %>'
+grails.plugins.springsecurity.ldap.context.server = '<%= @ldap_server %>'
+
+grails.plugins.springsecurity.ldap.authorities.groupSearchBase = '<%= @ldap_group_search_base %>'
+grails.plugins.springsecurity.ldap.authorities.retrieveGroupRoles = true
+grails.plugins.springsecurity.ldap.authorities.retrieveDatabaseRoles = false
+grails.plugins.springsecurity.ldap.authorities.groupSearchFilter = '<%= @ldap_group_search_filter %>'
+
+grails.plugins.springsecurity.ldap.search.base = '<%= @ldap_search_base %>'
+grails.plugins.springsecurity.providerNames = ['ldapAuthProvider','anonymousAuthenticationProvider']
+
+grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+        '/login/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**':          ['ROLE_ADMINS','ROLE_USERS','IS_AUTHENTICATED_FULLY']
+]
