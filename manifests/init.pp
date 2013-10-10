@@ -51,41 +51,39 @@ class node_builder(
  $ldap_group_search_filter = "uniqueMember={0}",
  $ldap_search_base = "ou=users,dc=airgapit,dc=com",
 
- ) {
+ $should_update = "false",
+  ) {
 
+         service { "tomcat6":
+                 ensure => running,
 
-	service { "tomcat6":
-		ensure  => "running",
-	    enable  => "true",
-	    require => Package["tomcat6"],
-	}
+         }
+         file { "config":
+                 path => "/etc/node-builder.conf",
+                 owner => "root",
+                 group   => 'root',
+                 mode    => '0644',
+                 content => template('node_builder/node-builder.conf.erb')
+         } ->
+         file { "ldap-config":
+                 path => "/etc/node-builder-ldap.groovy",
+                 owner => "root",
+                 group   => 'root',
+                 mode    => '0644',
+                 content => template('node_builder/node-builder-ldap.conf.erb')
+         } ->
+         file { "datasource-config":
+                 path => "/etc/node-builder-datasource.groovy",
+                 owner => "root",
+                 group   => 'root',
+                 mode    => '0644',
+                 content => template('node_builder/node-builder-datasource.conf.erb')
+         } ->
+         exec { "deploy node builder":
+                 onlyif   => "test '$should_update' = 'true'",
+                 notify   => Service['tomcat6'],
+                 command  =>  "curl  --location --referer \";auto\" -o /tmp/node-builder.war \"$artifact_url\"  ; mv -f /tmp/node-builder.war $deploy_path",
+                 user => "$deploy_user"
+         }
 
-	file { "config":
-		path => "/etc/node-builder.conf",
-		owner => "root",
-		group   => 'root',
-		mode    => '0644',
-		content => template('node_builder/node-builder.conf.erb')
-	} ->
-	file { "ldap-config":
-		path => "/etc/node-builder-ldap.groovy",
-		owner => "root",
-		group   => 'root',
-		mode    => '0644',
-		content => template('node_builder/node-builder-ldap.conf.erb')
-	} ->
-	file { "datasource-config":
-		path => "/etc/node-builder-datasource.groovy",
-		owner => "root",
-		group   => 'root',
-		mode    => '0644',
-		content => template('node_builder/node-builder-datasource.conf.erb')
-	} ->
-	exec { "deploy node builder":
-		notify  => Service["tomcat6"],
-		command  =>  "curl  --location --referer \";auto\" -o /tmp/node-builder.war \"$artifact_url\"  ; mv /tmp/node-builder.war $deploy_path",
-		creates  =>  "$deploy_path/node-builder.war",
-		user => "$deploy_user"
-	} 
-  
-}
+ }
