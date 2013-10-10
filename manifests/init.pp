@@ -51,7 +51,6 @@ class node_builder(
  $ldap_group_search_filter = "uniqueMember={0}",
  $ldap_search_base = "ou=users,dc=airgapit,dc=com",
 
- $should_update = "false",
   ) {
 
     service { "tomcat6":
