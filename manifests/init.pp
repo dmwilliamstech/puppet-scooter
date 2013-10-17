@@ -62,12 +62,7 @@ class node_builder(
     service { "tomcat6":
            ensure => running,
 
-    }
-    
-    service { "mongod":
-      ensure => running
-    }
-    
+    }    
     file { "config":
            path => "/etc/node-builder.conf",
            owner => "root",
