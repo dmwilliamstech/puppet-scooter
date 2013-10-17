@@ -208,10 +208,32 @@ puppet {
     remote.path = '<%= @puppet_remote_path %>'
 }
 
+/*
+ * Node builder uses mongo as a metrics store
+ */
 mongo {
+    /*
+     * hostname of the mongo server
+     */   
     hostname = "<%= @mongo_host %>"
+    
+    /*
+     * port of the mongo server
+     */       
     port = <%= @mongo_port %>
+    
+    /*
+     * username of the mongo server
+     */       
     username = "<%= @mongo_username %>"
+    
+    /*
+     * password of the mongo server
+     */       
     password = "<%= @mongo_password %>"
+    
+    /*
+     * database name for the metrics store
+     */       
     databaseName = "<%= @mongo_db_name %>"
 }
