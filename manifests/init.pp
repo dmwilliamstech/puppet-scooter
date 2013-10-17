@@ -8,7 +8,7 @@ class node_builder(
  $openstack_password = "password",
  $openstack_tenant_id  = "hash",
  $openstack_key_id = "id",
- $openstack_flavor_id = "3",
+ $openstack_flavor_id = "small",
  
  $puppet_name = 'puppet',
  $puppet_hostname = 'localhost',
@@ -44,6 +44,12 @@ class node_builder(
  $db_username = "tomcat",
  $db_password = "t0mc4t",
  
+ $mongo_host = "localhost",
+ $mongo_port = 27017,
+ $mongo_username = "mongo",
+ $mongo_password = "mongo",
+ $mongo_db_name = "nodebuilder",
+ 
  $ldap_manager_dn = 'cn=age,ou=users,dc=airgapit,dc=com',
  $ldap_manager_password = 'foobar99',
  $ldap_server = 'ldaps://ldap:636',
@@ -57,6 +63,11 @@ class node_builder(
            ensure => running,
 
     }
+    
+    service { "mongod":
+      ensure => running
+    }
+    
     file { "config":
            path => "/etc/node-builder.conf",
            owner => "root",
