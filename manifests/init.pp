@@ -1,4 +1,5 @@
 class node_builder(
+ $application_name = "NodeBuilder",
  $deploy_user="tomcat",
  $artifact_url="http://rizzo/nexus/service/local/artifact/maven/redirect?r=snapshots&g=org.codice.opendx&a=node-builder&v=1.0-SNAPSHOT&e=war",
  $deploy_path="/usr/share/tomcat6/webapps",
