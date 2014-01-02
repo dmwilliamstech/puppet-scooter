@@ -69,6 +69,9 @@ class node_builder(
   $ldap_search_base = "ou=users,dc=airgapit,dc=com",
 
 ) {
+    package { "tomcat6":
+        ensure => installed
+    } ->
     service { "tomcat6":
       ensure => running,
 
