@@ -241,6 +241,33 @@ puppet {
      * path to the manifest/nodes directory on the puppet master
      */
     remote.path = '<%= @puppet_remote_path %>'
+    
+    /*
+     * set of configurations that are use when connecting to the Puppet
+     * Enterprise API
+     */
+    api {
+
+      /*
+       * port the api is running on
+       */
+      port = <%= @puppet_api_port %>
+
+      /*
+       * path to the cacert file in the local filesystem
+       */
+      cacert = '<%= @puppet_api_cacert %>'
+
+      /*
+       * path to the cert file in the local filesystem
+       */
+      cert = '<%= @puppet_api_cert %>'
+
+      /*
+       * path to the private key file in the local filesystem
+       */
+      privateKey = '<%= @puppet_api_privateKey %>'
+    }
 }
 
 /*

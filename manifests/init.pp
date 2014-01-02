@@ -22,6 +22,10 @@ class node_builder(
   $puppet_username = 'username',
   $puppet_private_key = '~/.ssh/id_rsa',
   $puppet_remote_path = '/etc/puppetlabs/puppet/manifests/nodes/',
+  $puppet_api_port = 8140,
+  $puppet_api_cacert = '/full/path/to/ca_crt.pem',
+  $puppet_api_cert = '/full/path/to/cert.pem',
+  $puppet_api_privateKey = '/full/path/to/pk.pem',
   
   $smtp_hostname = 'hostname',
   $smtp_port = 465,
