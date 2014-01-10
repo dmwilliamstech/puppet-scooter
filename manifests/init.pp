@@ -101,7 +101,7 @@ class node_builder(
       command => "/usr/bin/curl -o ${deploy_path}/node-builder-new-version.txt  \"${artifact_url}\""
     } ->
     exec { "deploy node builder":
-      unless   => "diff ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
+      unless   => "/usr/bin/diff ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       notify   => Service['tomcat6'],
       command  =>  "/usr/bin/curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       user     => $deploy_user
