@@ -98,12 +98,12 @@ class node_builder(
       content => template('node_builder/node-builder-datasource.conf.erb')
     } -> 
     exec { "new-version":
-      command => "curl -o ${deploy_path}/node-builder-new-version.txt  \"${artifact_url}\""
+      command => "/usr/bin/curl -o ${deploy_path}/node-builder-new-version.txt  \"${artifact_url}\""
     } ->
     exec { "deploy node builder":
       unless   => "diff ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       notify   => Service['tomcat6'],
-      command  =>  "curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
+      command  =>  "/usr/bin/curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       user     => $deploy_user
     }
 }
