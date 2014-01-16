@@ -1,3 +1,32 @@
+directories {
+    users { 
+        url = "<%= @ldap_server %>"
+        base = "<%= @ldap_search_base %>"
+        userDn = '<%= @ldap_manager_dn %>'
+        password = "<%= @ldap_manager_password %>" 
+        searchControls { 
+            countLimit = 40 
+            timeLimit = 600 
+            searchScope = "subtree" 
+      }
+    }
+    groups { 
+          url = "<%= @ldap_server %>"
+          base = "<%= @ldap_group_search_base %>'"
+          userDn = '<%= @ldap_manager_dn %>'
+          password = "<%= @ldap_manager_password %>" 
+        searchControls { 
+              countLimit = 40 
+              timeLimit = 600 
+              searchScope = "subtree" 
+        }
+    }
+}
+schemas = [ 
+  node.builder.ldap.User,
+  node.builder.ldap.Group
+]
+
 
 grails.plugins.springsecurity.ldap.context.managerDn = '<%= @ldap_manager_dn %>'
 grails.plugins.springsecurity.ldap.context.managerPassword = '<%= @ldap_manager_password %>'
