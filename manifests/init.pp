@@ -103,7 +103,7 @@ class node_builder(
     exec { "deploy node builder":
       unless   => "/usr/bin/diff ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       notify   => Service['tomcat6'],
-      command  =>  "/bin/rm -rf ${deploy_path}/node_builder* ; sleep 10s ; /usr/bin/curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
+      command  =>  "/bin/rm -rf ${deploy_path}/node-builder* ; sleep 10s ; /usr/bin/curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
       user     => $deploy_user
     }
 }
