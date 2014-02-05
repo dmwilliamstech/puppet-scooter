@@ -67,6 +67,8 @@ class node_builder(
   $ldap_group_search_base = 'ou=groups,dc=airgapit,dc=com',
   $ldap_group_search_filter = "uniqueMember={0}",
   $ldap_search_base = "ou=users,dc=airgapit,dc=com",
+  
+  $ohloh_api_key = "api key",
 
 ) {
     package { "tomcat6":
