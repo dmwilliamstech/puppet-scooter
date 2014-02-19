@@ -25,6 +25,6 @@ class { "scooter":
   openstack_tenant_id => "2ba2d60c5e8d4d1b86549d988131fe48"
 }
 
-NOTE: there are several other variables you can provide to the node_builder class in order to fine tune your installation.
+NOTE: there are several other variables you can provide to the scooter class in order to fine tune your installation.
 
 ```
