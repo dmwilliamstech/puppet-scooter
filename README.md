@@ -1,11 +1,11 @@
-# puppet-node_builder
+# puppet-scooter
 
-A Puppet module for deploying a [Node Builder](https://github.com/OpenDX/node-builder) application.
+A Puppet module for deploying a [Scooter](https://github.com/airgap/scooter) application.
 
 
 ---
 
-I happen to be using this with [Vagrant](http://vagrantup.com) to rapidly provision a basic CentOS server with a NodeBuilder environment.
+I happen to be using this with [Vagrant](http://vagrantup.com) to rapidly provision a basic CentOS server with a Scooter environment.
 
 ---
 
@@ -18,16 +18,10 @@ group { "puppet": ensure => "present", }
 
 Exec { path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", }
 
-package { "tomcat6":
-    ensure => "installed"
-} ->
-service { "tomcat6":
-  ensure => "running",
-} ->
-class { "node_builder":
-  openstack_key_id => "opendx_demo",
-  openstack_hostname => "hostname",
-  master_hostname => "hostname",
+class { "scooter":
+  openstack_key_id => "some key",
+  openstack_url => "hostname",
+  puppet_hostname => "hostname",
   openstack_tenant_id => "2ba2d60c5e8d4d1b86549d988131fe48"
 }
 

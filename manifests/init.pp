@@ -1,5 +1,5 @@
 # Puppet class for deploying latest Node-Builder
-class node_builder(
+class scooter(
   $application_name = "NodeBuilder",
   $application_footer_text = "Copyright &copy; 2013 AirGap",
   $application_footer_text_color = "#ccc",
@@ -7,7 +7,7 @@ class node_builder(
   $application_banner_text_color = "#FFFF00",
   $application_banner_background_color = "#008000",
   $deploy_user="tomcat",
-  $artifact_url="http://rizzo/nexus/service/local/artifact/maven/redirect?r=snapshots&g=org.codice.opendx&a=node-builder&v=1.0-SNAPSHOT&e=war",
+  $artifact_url="http://rizzo.airgap.us/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.airgap&a=scooter&v=0.1-SNAPSHOT&e=war",
   $deploy_path="/usr/share/tomcat6/webapps",
   
   $openstack_url = "https://localhost:5000/v2.0",
@@ -79,34 +79,35 @@ class node_builder(
 
     }    
     file { "config":
-      path    => "/etc/node-builder.conf",
+      path    => "/etc/scooter.conf",
       owner   => "root",
       group   => 'root',
       mode    => '0644',
-      content => template('node_builder/node-builder.conf.erb')
+      content => template('scooter/scooter.conf.erb')
     } ->
     file { "ldap-config":
-      path    => "/etc/node-builder-ldap.groovy",
+      path    => "/etc/scooter-ldap.groovy",
       owner   => "root",
       group   => 'root',
       mode    => '0644',
-      content => template('node_builder/node-builder-ldap.conf.erb')
+      content => template('scooter/scooter-ldap.conf.erb')
     } ->
     file { "datasource-config":
-      path    => "/etc/node-builder-datasource.groovy",
+      path    => "/etc/scooter-datasource.groovy",
       owner   => "root",
       group   => 'root',
       mode    => '0644',
-      content => template('node_builder/node-builder-datasource.conf.erb')
+      content => template('scooter/scooter-datasource.conf.erb')
     } -> 
     exec { "new-version":
-      command => "/usr/bin/curl -o ${deploy_path}/node-builder-new-version.txt  \"${artifact_url}\""
+      command => "/usr/bin/curl -o ${deploy_path}/scooter-new-version.txt  \"${artifact_url}\""
     } ->
     exec { "deploy node builder":
-      unless   => "/usr/bin/diff ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
+      unless   => "/usr/bin/diff ${deploy_path}/scooter-new-version.txt ${deploy_path}/scooter-version.txt",
       notify   => Service['tomcat6'],
-      command  =>  "/bin/rm -rf ${deploy_path}/node-builder/; /bin/rm -rf ${deploy_path}/node-builder.war  ; sleep 10s ; /usr/bin/curl  --location --referer \";auto\" -o /tmp/node-builder.war \"${artifact_url}\"  ; mv -f /tmp/node-builder.war ${deploy_path} ; mv ${deploy_path}/node-builder-new-version.txt ${deploy_path}/node-builder-version.txt",
-      user     => $deploy_user
+      command  =>  "/bin/rm -rf ${deploy_path}/scooter/; /bin/rm -rf ${deploy_path}/scooter.war  ; sleep 10s ; /usr/bin/curl  --location --referer \";auto\" -o /tmp/scooter.war \"${artifact_url}\"  ; mv -f /tmp/scooter.war ${deploy_path} ; mv ${deploy_path}/scooter-new-version.txt ${deploy_path}/scooter-version.txt",
+      user     => $deploy_user,
+      timeout  => 900
     }
 }
   
