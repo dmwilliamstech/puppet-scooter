@@ -71,13 +71,15 @@ class scooter(
   $ohloh_api_key = "api key",
 
 ) {
-    package { "tomcat6":
-        ensure => installed
-    } ->
+
     service { "tomcat6":
       ensure => running,
 
-    }    
+    }   
+    
+    package { "tomcat6":
+        ensure => installed
+    } ->
     file { "config":
       path    => "/etc/scooter.conf",
       owner   => "root",
