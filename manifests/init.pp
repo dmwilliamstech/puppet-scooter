@@ -74,12 +74,24 @@ class scooter(
 
     service { "tomcat6":
       ensure => running,
-
+      hasrestart => true,
     }   
     
+    class { 'java':
+      distribution => 'jdk',
+      version      => 'latest',
+    } ->
+    class { 'certs' : 
+    } ->
     package { "tomcat6":
         ensure => installed
     } ->
+    file { '/usr/share/tomcat6/':
+        path => '/usr/share/tomcat6/',
+        recurse => true,
+        owner => 'tomcat',
+        group => 'tomcat',
+    } -> 
     file { "config":
       path    => "/etc/scooter.conf",
       owner   => "root",
@@ -110,6 +122,15 @@ class scooter(
       command  =>  "/bin/rm -rf ${deploy_path}/scooter/; /bin/rm -rf ${deploy_path}/scooter.war  ; sleep 10s ; /usr/bin/curl  --location --referer \";auto\" -o /tmp/scooter.war \"${artifact_url}\"  ; mv -f /tmp/scooter.war ${deploy_path} ; mv ${deploy_path}/scooter-new-version.txt ${deploy_path}/scooter-version.txt",
       user     => $deploy_user,
       timeout  => 900
+    }->
+    exec { 'stop iptables':
+      unless  => "/usr/bin/diff ${deploy_path}/scooter-new-version.txt ${deploy_path}/scooter-version.txt",
+      command => "/etc/init.d/iptables stop"
+
+    } -> 
+    exec { 'kill iptables':
+      unless  => "/usr/bin/diff ${deploy_path}/scooter-new-version.txt ${deploy_path}/scooter-version.txt",
+      command => "chkconfig iptables off"
     }
 }
   
