@@ -7,7 +7,7 @@ class scooter(
   $application_banner_text_color = "#FFFF00",
   $application_banner_background_color = "#008000",
   $deploy_user="tomcat",
-  $artifact_url="http://rizzo.airgap.us/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.airgap&a=scooter&v=0.1-SNAPSHOT&e=war",
+  $artifact_url="https://rizzo.airgap.us/service/local/artifact/maven/redirect?r=snapshots&g=com.airgap&a=scooter&v=0.1-SNAPSHOT&e=war",
   $deploy_path="/usr/share/tomcat6/webapps",
   
   $openstack_url = "https://localhost:5000/v2.0",
