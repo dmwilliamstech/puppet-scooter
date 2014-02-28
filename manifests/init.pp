@@ -88,11 +88,8 @@ class scooter(
     package { "tomcat6":
         ensure => installed
     } ->
-    file { '/usr/share/tomcat6/':
-        path => '/usr/share/tomcat6/',
-        recurse => true,
-        owner => 'tomcat',
-        group => 'tomcat',
+    exec { 'give path to tomcat':
+        command => 'chown tomcat:tomcat /usr/share/tomcat6/',
     } -> 
     file { "config":
       path    => "/etc/scooter.conf",
