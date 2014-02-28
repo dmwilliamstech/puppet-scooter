@@ -69,6 +69,7 @@ class scooter(
   $ldap_search_base = "ou=users,dc=airgapit,dc=com",
   
   $ohloh_api_key = "api key",
+  $jre_install_path = '/usr/java/default/jre/',
 
 ) {
 
@@ -81,7 +82,8 @@ class scooter(
       distribution => 'jdk',
       version      => 'latest',
     } ->
-    class { 'certs' : 
+    class { 'certs' :
+      install_path  => $jre_install_path
     } ->
     package { "tomcat6":
         ensure => installed
