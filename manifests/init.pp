@@ -87,9 +87,12 @@ class scooter(
     } ->
     package { "tomcat6":
         ensure => installed
+    } -> 
+    exec { 'allow login for tomcat':
+      command => 'chsh -s /bin/bash tomcat'
     } ->
     exec { 'give path to tomcat':
-        command => 'chown tomcat:tomcat /usr/share/tomcat6/',
+      command => 'chown tomcat:tomcat /usr/share/tomcat6/',
     } -> 
     file { "config":
       path    => "/etc/scooter.conf",
