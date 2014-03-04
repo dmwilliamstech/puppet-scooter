@@ -88,7 +88,7 @@ class scooter(
     package { "tomcat6":
         ensure => installed
     } -> 
-    user { 'tomcat':
+    user { 'set tomcat shell':
       name => 'tomcat',
       shell => '/bin/bash'
     } ->
