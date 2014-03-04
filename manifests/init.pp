@@ -70,7 +70,8 @@ class scooter(
   
   $ohloh_api_key = "api key",
   $jre_install_path = '/usr/java/default/jre/',
-
+  
+  $user_groups = 'git',
 ) {
 
     service { "tomcat6":
@@ -88,9 +89,10 @@ class scooter(
     package { "tomcat6":
         ensure => installed
     } -> 
-    user { 'set tomcat shell':
+    user { 'tomcat':
       name => 'tomcat',
-      shell => '/bin/bash'
+      shell => '/bin/bash',
+      groups => $user_groups,
     } ->
     exec { 'give path to tomcat':
       command => 'chown tomcat:tomcat /usr/share/tomcat6/',
